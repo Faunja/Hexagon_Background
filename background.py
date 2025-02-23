@@ -6,7 +6,7 @@ import pygame
 from variables import *
 
 backHexagon = (0, 0, 0)
-frontHexagon = (210, 210, 210)
+frontHexagon = (204, 204, 204)
 
 def draw_hexagon(x, y, hexagon_radius):
     straight_x = hexagon_radius * (4 / 5)
@@ -21,12 +21,12 @@ def draw_background_hexagon(x, y, hexagon_radius):
     pygame.draw.polygon(screen, backHexagon, ((x + corner_x, y + corner_y), (x + straight_x, y), (x + corner_x, y - corner_y), (x - corner_x, y - corner_y), (x - straight_x, y), (x - corner_x, y + corner_y)))
     draw_hexagon(x, y, hexagon_radius)
 
-def draw_background(cameraPosition):
+def draw_background(cameraPosition, cameraPerspective):
     center_x = round(SCREEN_WIDTH / 2) + cameraPosition[0]
     center_y = round(SCREEN_HEIGHT / 2) + cameraPosition[1]
 
     # Define the Radius of the hexagon
-    hexagon_radius = SCREEN_WIDTH / 32
+    hexagon_radius = SCREEN_WIDTH / 32 / cameraPerspective
     # Calculates the distance between hexagons
     x_distance = hexagon_radius * (3 / 2)
     y_distance = hexagon_radius * (3 ** (1/2) / 2)

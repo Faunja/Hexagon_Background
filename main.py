@@ -14,6 +14,8 @@ def main():
 	newmousePosition = (0, 0)
 	oldmousePosition = (0, 0)
 	
+	cameraPerspective = 1
+	perspectiveChange = 1.2
 	cameraPosition = [0, 0]
 	cameraVelocity = [0, 0]
 	cameraFriction = .9
@@ -27,6 +29,17 @@ def main():
 				if event.button == 1:
 					screenGrab = True
 					centerCamera = False
+			if event.type == pygame.MOUSEWHEEL:
+				if event.y == 1:
+					if cameraPerspective < 2:
+						cameraPerspective *= perspectiveChange
+						cameraPosition[0] /= perspectiveChange
+						cameraPosition[1] /= perspectiveChange
+				if event.y == -1:
+					if cameraPerspective > .5:
+						cameraPerspective /= perspectiveChange
+						cameraPosition[0] *= perspectiveChange
+						cameraPosition[1] *= perspectiveChange
 			if event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
 					if screenGrab == True:
@@ -62,6 +75,6 @@ def main():
 		else:
 			cameraPosition[0] *= centerSpeed
 			cameraPosition[1] *= centerSpeed
-		draw_background(cameraPosition)
+		draw_background(cameraPosition, cameraPerspective)
 	pygame.quit()
 main()
