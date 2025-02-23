@@ -31,8 +31,8 @@ def draw_background(cameraPosition, cameraPerspective):
     x_distance = hexagon_radius * (3 / 2)
     y_distance = hexagon_radius * (3 ** (1/2) / 2)
     # Calculates the cutoff distance of hexagons
-    x_cutoff = [SCREEN_WIDTH + x_distance, -x_distance]
-    y_cutoff = [SCREEN_HEIGHT + y_distance, -y_distance]
+    x_cutoff = [-x_distance, SCREEN_WIDTH + x_distance]
+    y_cutoff = [-y_distance, SCREEN_HEIGHT + y_distance]
 
     x_offset = round(cameraPosition[0] / x_distance)
     y_offset = round(cameraPosition[1] / y_distance)
@@ -46,14 +46,14 @@ def draw_background(cameraPosition, cameraPerspective):
     screen.fill(White)
     for x in range(-x_repeat - x_offset, x_repeat + 1 - x_offset):
         x_position = center_x + x_distance * x
-        if x_position > x_cutoff[0] or x_position < x_cutoff[1]:
+        if x_position > x_cutoff[1] or x_position < x_cutoff[0]:
             continue
         for y in range(-y_repeat - 2 - y_offset, y_repeat + 1 - y_offset, 2):
             if x % 2 == 0:
                 y_position = center_y + y_distance * y
             else:
                 y_position = center_y + y_distance * (y + 1)
-            if y_position > y_cutoff[0] or y_position < y_cutoff[1]:
+            if y_position > y_cutoff[1] or y_position < y_cutoff[0]:
                 continue
             draw_background_hexagon(x_position, y_position, hexagon_radius)
 
