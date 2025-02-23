@@ -2,11 +2,11 @@
 # By Kayden Campbell
 # Copyright 2025
 # Licensed under the terms of the GPL 3
-import pygame
+import pygame, random
 from variables import *
 
-backHexagon = (0, 0, 0)
-frontHexagon = (204, 204, 204)
+backHexagon = (random.randint(0, 195), random.randint(0, 195), random.randint(0, 195))
+frontHexagon = (backHexagon[0] + 60, backHexagon[1] + 60, backHexagon[2] + 60)
 
 def draw_hexagon(x, y, hexagon_radius):
     straight_x = hexagon_radius * (4 / 5)
