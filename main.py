@@ -30,12 +30,12 @@ def main():
 					screenGrab = True
 					centerCamera = False
 			if event.type == pygame.MOUSEWHEEL:
-				if event.y == 1:
+				if event.y == -1:
 					if cameraPerspective < 2:
 						cameraPerspective *= perspectiveChange
 						cameraPosition[0] /= perspectiveChange
 						cameraPosition[1] /= perspectiveChange
-				if event.y == -1:
+				if event.y == 1:
 					if cameraPerspective > .5:
 						cameraPerspective /= perspectiveChange
 						cameraPosition[0] *= perspectiveChange

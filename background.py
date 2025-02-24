@@ -8,7 +8,7 @@ from variables import *
 colorMin = 0
 colorMax = 195
 colorDiff = 60
-hexGradiant = 11
+hexGradiant = 2
 
 backHexagon = (random.randint(colorMin, colorMax), random.randint(colorMin, colorMax), random.randint(colorMin, colorMax))
 frontHexagon = (backHexagon[0] + colorDiff, backHexagon[1] + colorDiff, backHexagon[2] + colorDiff)
@@ -32,7 +32,7 @@ def draw_hexagon(x, y, hexagonRadius, cameraPosition, cameraPerspective):
     true_y = y - center_y - cameraPosition[1] * cameraPerspective
     distanceAway = (true_x ** 2 + true_y ** 2) ** (1/2)
 
-    offsetColor = round(distanceAway / (hexagonRadius * hexGradiant))
+    offsetColor = round(distanceAway / (hexagonRadius * hexGradiant)) / cameraPerspective
     placeHolder = [backHexagon[0] - offsetColor, backHexagon[1] - offsetColor, backHexagon[2] - offsetColor]
     if placeHolder[0] < colorMin:
         placeHolder[0] = colorMin
