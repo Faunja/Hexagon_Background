@@ -7,7 +7,6 @@
 import pygame
 from variables import *
 from background import draw_background
-
 def main():
 	run = True
 	screenGrab = False
@@ -22,6 +21,7 @@ def main():
 	centerCamera = False
 	centerSpeed = .9
 
+	tabbed = True
 	while run:
 		clock.tick(FPS)
 		for event in pygame.event.get():
@@ -49,6 +49,11 @@ def main():
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
 					run = False
+				if event.key == pygame.K_TAB:
+					if tabbed == False:
+						tabbed = True
+					else:
+						tabbed = False
 				if event.key == pygame.K_c:
 					if screenGrab == False:
 						centerCamera = True
@@ -76,5 +81,7 @@ def main():
 			cameraPosition[0] *= centerSpeed
 			cameraPosition[1] *= centerSpeed
 		draw_background(cameraPosition, cameraPerspective)
+		pygame.display.set_caption(f'{clock.get_fps() :.1f}')
+		pygame.display.update()
 	pygame.quit()
 main()
