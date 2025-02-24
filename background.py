@@ -30,12 +30,12 @@ def color_check(color, difference, colorMin):
 def draw_background_hexagon(x, y, hexagonRadius, cameraPosition, cameraPerspective):
     center_x = round(SCREEN_WIDTH / 2)
     center_y = round(SCREEN_HEIGHT / 2)
-    true_x = x - center_x - cameraPosition[0] * cameraPerspective
-    true_y = y - center_y - cameraPosition[1] * cameraPerspective
+    true_x = x - center_x - cameraPosition[0]
+    true_y = y - center_y - cameraPosition[1]
     distanceAway = (true_x ** 2 + true_y ** 2) ** (1/2)
     hexGradiant = 20
 
-    offsetColor = round(distanceAway / (hexagonRadius * hexGradiant)) / cameraPerspective
+    offsetColor = round(distanceAway / (hexagonRadius * hexGradiant))
     backColor = color_check(backHexagon, offsetColor, hexagonMin)
     frontColor = color_check(frontHexagon, offsetColor, hexagonMin + hexagonDiff)
 
