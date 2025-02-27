@@ -7,9 +7,11 @@ from variables import *
 
 hexagonMin = 0
 hexagonMax = 195
-hexagonDiff = 60
+hexagonDiff = 255 - hexagonMax
 backHexagon = (random.randint(hexagonMin, hexagonMax), random.randint(hexagonMin, hexagonMax), random.randint(hexagonMin, hexagonMax))
 frontHexagon = (backHexagon[0] + hexagonDiff, backHexagon[1] + hexagonDiff, backHexagon[2] + hexagonDiff)
+gradiantDivisor = hexagonMax * 3 / 2
+hexGradiant = (frontHexagon[0] + frontHexagon[1] + frontHexagon[2]) / gradiantDivisor
 
 def draw_hexagon(x, y, hexagon_radius, color):
 	straight_x = hexagon_radius
@@ -33,14 +35,13 @@ def draw_background_hexagon(x, y, hexagonRadius, cameraPosition, cameraPerspecti
 	true_x = x - center_x - cameraPosition[0]
 	true_y = y - center_y - cameraPosition[1]
 	distanceAway = (true_x ** 2 + true_y ** 2) ** (1/2)
-	hexGradiant = 4
 
 	offsetColor = round(distanceAway / (hexagonRadius * hexGradiant))
 	backColor = color_check(backHexagon, offsetColor, hexagonMin)
 	frontColor = color_check(frontHexagon, offsetColor, hexagonMin + hexagonDiff)
 
 	draw_hexagon(x, y, hexagonRadius, backColor)
-	radiusDiff = 9 / 10
+	radiusDiff = 4 / 5
 	draw_hexagon(x, y, hexagonRadius * radiusDiff, frontColor)
 
 def draw_background(cameraPosition, cameraPerspective):
